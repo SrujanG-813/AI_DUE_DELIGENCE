@@ -1,0 +1,148 @@
+MASTER SERVICES AGREEMENT
+
+This Master Services Agreement ("Agreement") is entered into as of October 1, 2025 ("Effective Date"), by and between:
+
+TECHVISION AI, INC.
+123 Innovation Drive, San Francisco, CA 94105
+("Provider" or "TechVision")
+
+and
+
+GLOBALCORP ENTERPRISES, LLC
+456 Business Plaza, New York, NY 10001
+("Customer" or "Client")
+
+RECITALS
+
+WHEREAS, Provider offers enterprise artificial intelligence solutions and related services; and
+
+WHEREAS, Customer desires to engage Provider to deliver such services under the terms set forth herein.
+
+NOW, THEREFORE, in consideration of the mutual covenants and agreements contained herein, the parties agree as follows:
+
+1. SERVICES AND DELIVERABLES
+
+1.1 Provider shall deliver AI-powered analytics platform services as described in the attached Statement of Work (SOW).
+
+1.2 Provider will use commercially reasonable efforts to deliver services in accordance with the SOW timeline.
+
+1.3 Any modifications to services require written approval from Provider's account management team.
+
+2. TERM AND TERMINATION
+
+2.1 Initial Term: This Agreement shall commence on the Effective Date and continue for a period of thirty-six (36) months ("Initial Term").
+
+2.2 Renewal: This Agreement shall automatically renew for successive twelve (12) month periods unless either party provides written notice of non-renewal at least one hundred eighty (180) days prior to the end of the then-current term.
+
+2.3 Termination for Convenience by Provider: Provider may terminate this Agreement at any time with sixty (60) days written notice to Customer.
+
+2.4 Termination for Convenience by Customer: Customer may terminate this Agreement only with one hundred eighty (180) days written notice to Provider and upon payment of an early termination fee equal to 75% of the remaining contract value.
+
+2.5 Termination for Cause: Either party may terminate this Agreement immediately upon written notice if the other party materially breaches this Agreement and fails to cure such breach within thirty (30) days of receiving written notice.
+
+2.6 Effect of Termination: Upon termination, Customer shall immediately cease all use of Provider's services and return or destroy all Provider materials. All fees paid are non-refundable.
+
+3. FEES AND PAYMENT TERMS
+
+3.1 Annual Fee: Customer agrees to pay Provider an annual fee of $3,200,000 for the services, payable in quarterly installments of $800,000.
+
+3.2 Payment Terms: All invoices are due within fifteen (15) days of invoice date. Late payments shall accrue interest at 2% per month.
+
+3.3 Fee Increases: Provider reserves the right to increase fees by up to 15% annually upon sixty (60) days written notice.
+
+3.4 Additional Services: Any services beyond the scope of the SOW shall be billed at Provider's then-current rates.
+
+4. INTELLECTUAL PROPERTY RIGHTS
+
+4.1 Provider IP: All intellectual property rights in Provider's platform, software, algorithms, methodologies, and any pre-existing materials remain the exclusive property of Provider.
+
+4.2 Customer Data: Customer grants Provider a perpetual, worldwide, royalty-free license to use, modify, and create derivative works from any data, content, or materials provided by Customer for the purpose of delivering services and improving Provider's platform.
+
+4.3 Work Product: Any custom developments, configurations, or work product created under this Agreement shall be owned exclusively by Provider. Customer receives only a limited, non-transferable license to use such work product during the term of this Agreement.
+
+4.4 Feedback: Any suggestions, feedback, or ideas provided by Customer regarding Provider's services shall become the sole property of Provider without any compensation to Customer.
+
+4.5 Residual Rights: Provider retains all rights to use any residual knowledge, skills, or experience gained during the performance of services under this Agreement.
+
+5. CONFIDENTIALITY
+
+5.1 Confidential Information: Each party agrees to maintain the confidentiality of the other party's Confidential Information for a period of five (5) years following disclosure.
+
+5.2 Exceptions: Confidential Information does not include information that: (a) is publicly available through no breach of this Agreement; (b) was rightfully known prior to disclosure; or (c) is independently developed.
+
+5.3 Provider's Use: Notwithstanding the above, Provider may use Customer's Confidential Information for internal analytics, benchmarking, and service improvement purposes.
+
+6. LIABILITY AND INDEMNIFICATION
+
+6.1 Limitation of Liability: IN NO EVENT SHALL PROVIDER'S TOTAL LIABILITY UNDER THIS AGREEMENT EXCEED THE LESSER OF (A) $50,000 OR (B) THE FEES PAID BY CUSTOMER IN THE THREE (3) MONTHS PRECEDING THE CLAIM.
+
+6.2 Exclusion of Damages: PROVIDER SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOST REVENUE, OR LOST DATA, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+6.3 Customer Indemnification: Customer shall indemnify, defend, and hold harmless Provider from any claims, damages, or expenses arising from: (a) Customer's use of the services; (b) Customer's breach of this Agreement; (c) Customer's violation of any laws or regulations; or (d) any third-party claims related to Customer's data or content.
+
+6.4 Provider Indemnification: Provider shall indemnify Customer only for direct third-party claims of intellectual property infringement, subject to the liability cap in Section 6.1.
+
+7. WARRANTIES AND DISCLAIMERS
+
+7.1 Limited Warranty: Provider warrants that services will be performed in a professional manner consistent with industry standards.
+
+7.2 DISCLAIMER: EXCEPT AS EXPRESSLY SET FORTH ABOVE, PROVIDER MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. PROVIDER DOES NOT WARRANT THAT SERVICES WILL BE UNINTERRUPTED, ERROR-FREE, OR MEET CUSTOMER'S REQUIREMENTS.
+
+7.3 No Guarantee of Results: Provider makes no guarantees regarding the results, outcomes, or business benefits Customer may achieve from using the services.
+
+8. DATA AND SECURITY
+
+8.1 Data Processing: Provider may process Customer data on servers located in any jurisdiction where Provider or its subcontractors maintain facilities.
+
+8.2 Security: Provider will implement reasonable security measures to protect Customer data, but does not guarantee that unauthorized access will never occur.
+
+8.3 Data Breach: In the event of a data breach, Provider will notify Customer within thirty (30) days of discovering the breach.
+
+8.4 Backup: Provider is not responsible for maintaining backups of Customer data. Customer is solely responsible for maintaining its own backups.
+
+9. GENERAL PROVISIONS
+
+9.1 Governing Law: This Agreement shall be governed by the laws of the State of Delaware, without regard to conflict of law principles.
+
+9.2 Dispute Resolution: Any disputes shall be resolved through binding arbitration in Wilmington, Delaware under the rules of the American Arbitration Association. Customer waives any right to a jury trial.
+
+9.3 Assignment: Provider may assign this Agreement to any affiliate or successor without Customer consent. Customer may not assign this Agreement without Provider's prior written consent.
+
+9.4 Entire Agreement: This Agreement constitutes the entire agreement between the parties and supersedes all prior agreements and understandings.
+
+9.5 Amendments: Provider may amend this Agreement at any time by providing thirty (30) days notice to Customer. Customer's continued use of services constitutes acceptance of such amendments.
+
+9.6 Severability: If any provision is found unenforceable, the remaining provisions shall remain in full force and effect.
+
+9.7 Waiver: No waiver of any provision shall be deemed a waiver of any other provision or subsequent breach.
+
+10. SPECIAL PROVISIONS
+
+10.1 Publicity: Provider may use Customer's name and logo in Provider's marketing materials, case studies, and customer lists without prior approval.
+
+10.2 Reference: Customer agrees to serve as a reference for Provider and participate in reasonable marketing activities upon request.
+
+10.3 Audit Rights: Provider reserves the right to audit Customer's use of services at any time with five (5) business days notice.
+
+IN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.
+
+TECHVISION AI, INC.
+
+By: _________________________
+Name: Michael Torres
+Title: Chief Revenue Officer
+Date: October 1, 2025
+
+
+GLOBALCORP ENTERPRISES, LLC
+
+By: _________________________
+Name: Jennifer Walsh
+Title: VP of Technology
+Date: October 1, 2025
+
+
+---
+Contract Reference: MSA-2025-GC-047
+Annual Contract Value: $3,200,000
+Term: 36 months with auto-renewal

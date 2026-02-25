@@ -1,0 +1,27 @@
+{
+  "name": "ai-due-diligence-engine",
+  "version": "2.0.0",
+  "description": "AI-powered investment risk analysis with beautiful React UI",
+  "scripts": {
+    "start": "concurrently \"python api_server.py\" \"cd frontend && npm run dev\"",
+    "start:backend": "python api_server.py",
+    "start:frontend": "cd frontend && npm run dev",
+    "install:all": "pip install -r requirements.txt && cd frontend && npm install",
+    "build": "cd frontend && npm run build",
+    "test": "pytest tests/",
+    "test:frontend": "cd frontend && npm test"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "ai",
+    "due-diligence",
+    "risk-analysis",
+    "react",
+    "typescript",
+    "fastapi"
+  ],
+  "author": "",
+  "license": "ISC"
+}
