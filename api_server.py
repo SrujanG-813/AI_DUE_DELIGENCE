@@ -33,10 +33,16 @@ except ImportError:
 
 try:
     from langchain_mistralai import ChatMistralAI
-    from langchain_community.embeddings import HuggingFaceEmbeddings
     MISTRAL_AVAILABLE = True
 except ImportError:
     MISTRAL_AVAILABLE = False
+
+# Always use OpenAI embeddings for Railway deployment to avoid heavy dependencies
+try:
+    from langchain_openai import OpenAIEmbeddings
+    OPENAI_EMBEDDINGS_AVAILABLE = True
+except ImportError:
+    OPENAI_EMBEDDINGS_AVAILABLE = False
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -78,15 +84,24 @@ async def health_check():
     openai_key = os.getenv("OPENAI_API_KEY")
     mistral_key = os.getenv("MISTRAL_API_KEY")
     
+    # For Railway deployment, we need OpenAI for embeddings
+    if not openai_key:
+        return {
+            "status": "unhealthy",
+            "api_key_configured": False,
+            "provider": None,
+            "message": "OpenAI API key required for embeddings in Railway deployment"
+        }
+    
     provider = None
     if mistral_key:
-        provider = "Mistral AI"
+        provider = "Mistral AI (with OpenAI embeddings)"
     elif openai_key:
         provider = "OpenAI"
     
     return {
         "status": "healthy",
-        "api_key_configured": bool(openai_key or mistral_key),
+        "api_key_configured": True,
         "provider": provider,
         "message": f"API is operational with {provider}" if provider else "No AI provider configured"
     }
@@ -119,14 +134,14 @@ async def analyze_documents(files: List[UploadFile] = File(...)):
         - memo: Complete markdown risk memo
     """
     
-    # Check if API key is configured
+    # Check if API key is configured - Railway deployment requires OpenAI for embeddings
     openai_key = os.getenv("OPENAI_API_KEY")
     mistral_key = os.getenv("MISTRAL_API_KEY")
     
-    if not openai_key and not mistral_key:
+    if not openai_key:
         raise HTTPException(
             status_code=500,
-            detail="No AI provider configured. Please set OPENAI_API_KEY or MISTRAL_API_KEY environment variable."
+            detail="OpenAI API key required for embeddings in Railway deployment. Please set OPENAI_API_KEY environment variable."
         )
     
     # Validate files
@@ -169,11 +184,8 @@ async def analyze_documents(files: List[UploadFile] = File(...)):
         chunks = chunk_documents(documents)
         
         print(f"Creating vector store...")
-        # Choose embeddings based on available provider
-        if mistral_key and MISTRAL_AVAILABLE:
-            print("Using HuggingFace embeddings (for Mistral)")
-            embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-        elif openai_key and OPENAI_AVAILABLE:
+        # For Railway deployment, always use OpenAI embeddings to avoid heavy dependencies
+        if OPENAI_EMBEDDINGS_AVAILABLE:
             print("Using OpenAI embeddings")
             embeddings = OpenAIEmbeddings()
         else:
@@ -293,14 +305,14 @@ async def analyze_sample_documents():
     for demonstration purposes.
     """
     
-    # Check if API key is configured
+    # Check if API key is configured - Railway deployment requires OpenAI for embeddings
     openai_key = os.getenv("OPENAI_API_KEY")
     mistral_key = os.getenv("MISTRAL_API_KEY")
     
-    if not openai_key and not mistral_key:
+    if not openai_key:
         raise HTTPException(
             status_code=500,
-            detail="No AI provider configured. Please set OPENAI_API_KEY or MISTRAL_API_KEY environment variable."
+            detail="OpenAI API key required for embeddings in Railway deployment. Please set OPENAI_API_KEY environment variable."
         )
     
     # Sample document paths
@@ -328,11 +340,8 @@ async def analyze_sample_documents():
         chunks = chunk_documents(documents)
         
         print("Creating vector store...")
-        # Choose embeddings based on available provider
-        if mistral_key and MISTRAL_AVAILABLE:
-            print("Using HuggingFace embeddings (for Mistral)")
-            embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-        elif openai_key and OPENAI_AVAILABLE:
+        # For Railway deployment, always use OpenAI embeddings to avoid heavy dependencies
+        if OPENAI_EMBEDDINGS_AVAILABLE:
             print("Using OpenAI embeddings")
             embeddings = OpenAIEmbeddings()
         else:

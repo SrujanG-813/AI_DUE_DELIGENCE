@@ -1,16 +1,23 @@
-langchain>=0.1.0
-openai>=1.10.0
-faiss-cpu>=1.7.0
-pypdf2==3.0.1
-hypothesis>=6.92.0
-pytest>=7.4.3
-langchain-openai>=0.0.2
-python-dotenv>=1.0.0
-numpy>=1.24.0
+# Core web framework
 fastapi>=0.109.0
 uvicorn>=0.27.0
 python-multipart>=0.0.6
-langchain-mistralai>=0.0.1
-langchain-community>=0.0.1
-sentence-transformers>=2.2.0
+python-dotenv>=1.0.0
 requests>=2.31.0
+
+# AI/ML Core (minimal)
+langchain>=0.1.0
+langchain-core>=0.1.0
+langchain-openai>=0.0.2
+langchain-mistralai>=0.0.1
+openai>=1.10.0
+
+# Vector Store (CPU only)
+faiss-cpu>=1.7.0
+numpy>=1.24.0
+
+# Document Processing
+pypdf2==3.0.1
+
+# Minimal embeddings without heavy ML dependencies
+# We'll use OpenAI embeddings instead of sentence-transformers to avoid PyTorch
