@@ -37,12 +37,8 @@ try:
 except ImportError:
     MISTRAL_AVAILABLE = False
 
-# Always use OpenAI embeddings for Railway deployment to avoid heavy dependencies
-try:
-    from langchain_openai import OpenAIEmbeddings
-    OPENAI_EMBEDDINGS_AVAILABLE = True
-except ImportError:
-    OPENAI_EMBEDDINGS_AVAILABLE = False
+# Import our free embeddings
+from ai_due_diligence.free_embeddings import FreeEmbeddings
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -81,29 +77,17 @@ async def root():
 async def health_check():
     """Health check endpoint"""
     # Check which AI provider is configured
-    openai_key = os.getenv("OPENAI_API_KEY")
     mistral_key = os.getenv("MISTRAL_API_KEY")
-    
-    # For Railway deployment, we need OpenAI for embeddings
-    if not openai_key:
-        return {
-            "status": "unhealthy",
-            "api_key_configured": False,
-            "provider": None,
-            "message": "OpenAI API key required for embeddings in Railway deployment"
-        }
     
     provider = None
     if mistral_key:
-        provider = "Mistral AI (with OpenAI embeddings)"
-    elif openai_key:
-        provider = "OpenAI"
+        provider = "Mistral AI (with free TF-IDF embeddings)"
     
     return {
         "status": "healthy",
-        "api_key_configured": True,
+        "api_key_configured": bool(mistral_key),
         "provider": provider,
-        "message": f"API is operational with {provider}" if provider else "No AI provider configured"
+        "message": f"API is operational with {provider}" if provider else "Mistral API key required"
     }
 
 
@@ -134,14 +118,13 @@ async def analyze_documents(files: List[UploadFile] = File(...)):
         - memo: Complete markdown risk memo
     """
     
-    # Check if API key is configured - Railway deployment requires OpenAI for embeddings
-    openai_key = os.getenv("OPENAI_API_KEY")
+    # Check if API key is configured - only need Mistral for free deployment
     mistral_key = os.getenv("MISTRAL_API_KEY")
     
-    if not openai_key:
+    if not mistral_key:
         raise HTTPException(
             status_code=500,
-            detail="OpenAI API key required for embeddings in Railway deployment. Please set OPENAI_API_KEY environment variable."
+            detail="Mistral API key required. Please set MISTRAL_API_KEY environment variable. Get a free key at https://console.mistral.ai/"
         )
     
     # Validate files
@@ -184,18 +167,19 @@ async def analyze_documents(files: List[UploadFile] = File(...)):
         chunks = chunk_documents(documents)
         
         print(f"Creating vector store...")
-        # For Railway deployment, always use OpenAI embeddings to avoid heavy dependencies
-        if OPENAI_EMBEDDINGS_AVAILABLE:
-            print("Using OpenAI embeddings")
-            embeddings = OpenAIEmbeddings()
-        else:
-            raise HTTPException(status_code=500, detail="No embedding provider available")
+        # Use free TF-IDF embeddings to avoid API costs
+        print("Using free TF-IDF embeddings")
+        embeddings = FreeEmbeddings(max_features=1000)
+        
+        # Pre-fit the embeddings on all document chunks for better performance
+        all_texts = [chunk.page_content for chunk in chunks]
+        embeddings.add_texts_to_corpus(all_texts)
         
         vector_store = create_vector_store(chunks, embeddings)
         
         # Step 2: Initialize LLM and Agents
         print("Initializing AI agents...")
-        # Choose LLM based on available provider
+        # Use Mistral AI for LLM
         if mistral_key and MISTRAL_AVAILABLE:
             print("Using Mistral AI")
             llm = ChatMistralAI(
@@ -203,11 +187,8 @@ async def analyze_documents(files: List[UploadFile] = File(...)):
                 mistral_api_key=mistral_key,
                 temperature=0
             )
-        elif openai_key and OPENAI_AVAILABLE:
-            print("Using OpenAI GPT-4")
-            llm = ChatOpenAI(model="gpt-4", temperature=0)
         else:
-            raise HTTPException(status_code=500, detail="No LLM provider available")
+            raise HTTPException(status_code=500, detail="Mistral AI not available")
         
         # Step 3: Run Agent Analyses
         print("Analyzing financial risks...")
@@ -305,14 +286,13 @@ async def analyze_sample_documents():
     for demonstration purposes.
     """
     
-    # Check if API key is configured - Railway deployment requires OpenAI for embeddings
-    openai_key = os.getenv("OPENAI_API_KEY")
+    # Check if API key is configured - only need Mistral for free deployment
     mistral_key = os.getenv("MISTRAL_API_KEY")
     
-    if not openai_key:
+    if not mistral_key:
         raise HTTPException(
             status_code=500,
-            detail="OpenAI API key required for embeddings in Railway deployment. Please set OPENAI_API_KEY environment variable."
+            detail="Mistral API key required. Please set MISTRAL_API_KEY environment variable. Get a free key at https://console.mistral.ai/"
         )
     
     # Sample document paths
@@ -340,17 +320,18 @@ async def analyze_sample_documents():
         chunks = chunk_documents(documents)
         
         print("Creating vector store...")
-        # For Railway deployment, always use OpenAI embeddings to avoid heavy dependencies
-        if OPENAI_EMBEDDINGS_AVAILABLE:
-            print("Using OpenAI embeddings")
-            embeddings = OpenAIEmbeddings()
-        else:
-            raise HTTPException(status_code=500, detail="No embedding provider available")
+        # Use free TF-IDF embeddings to avoid API costs
+        print("Using free TF-IDF embeddings")
+        embeddings = FreeEmbeddings(max_features=1000)
+        
+        # Pre-fit the embeddings on all document chunks for better performance
+        all_texts = [chunk.page_content for chunk in chunks]
+        embeddings.add_texts_to_corpus(all_texts)
         
         vector_store = create_vector_store(chunks, embeddings)
         
         print("Initializing AI agents...")
-        # Choose LLM based on available provider
+        # Use Mistral AI for LLM
         if mistral_key and MISTRAL_AVAILABLE:
             print("Using Mistral AI")
             llm = ChatMistralAI(
@@ -358,11 +339,8 @@ async def analyze_sample_documents():
                 mistral_api_key=mistral_key,
                 temperature=0
             )
-        elif openai_key and OPENAI_AVAILABLE:
-            print("Using OpenAI GPT-4")
-            llm = ChatOpenAI(model="gpt-4", temperature=0)
         else:
-            raise HTTPException(status_code=500, detail="No LLM provider available")
+            raise HTTPException(status_code=500, detail="Mistral AI not available")
         
         print("Analyzing financial risks...")
         financial_agent = FinancialRiskAgent(llm, vector_store)

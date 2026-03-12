@@ -21,7 +21,7 @@ Upload business documents (contracts, financials, policies) and get:
 ### Prerequisites
 - Python 3.9+
 - Node.js 16+
-- Mistral AI API key ([Get one free](https://console.mistral.ai/)) OR OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
+- Mistral AI API key ([Get one FREE](https://console.mistral.ai/)) - Mistral offers generous free tier!
 
 ### Installation
 
@@ -48,10 +48,8 @@ cd ..
 # Copy .env.example to .env
 cp .env.example .env
 
-# Edit .env and add your API key (choose one):
+# Edit .env and add your FREE Mistral API key:
 MISTRAL_API_KEY=your_key_here
-# OR
-OPENAI_API_KEY=your_key_here
 ```
 
 ### Run the Application
@@ -94,7 +92,7 @@ Deploy to Railway in one click:
 Or follow the [Railway Deployment Guide](RAILWAY_DEPLOYMENT.md) for manual setup.
 
 **Required Environment Variables:**
-- `MISTRAL_API_KEY` or `OPENAI_API_KEY` (at least one required)
+- `MISTRAL_API_KEY` (FREE - get at console.mistral.ai)
 
 ## 📖 Documentation
 
