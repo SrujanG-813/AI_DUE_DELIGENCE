@@ -8,6 +8,7 @@ allowing the React frontend to communicate with the Python backend.
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from typing import List
 import tempfile
 import os
@@ -47,11 +48,17 @@ app = FastAPI(
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],
+    allow_origins=["*"],  # Allow all origins for Railway deployment
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Serve static files from frontend build
+frontend_build_path = Path(__file__).parent / "frontend" / "dist"
+if frontend_build_path.exists():
+    app.mount("/static", StaticFiles(directory=str(frontend_build_path / "assets")), name="static")
+    app.mount("/", StaticFiles(directory=str(frontend_build_path), html=True), name="frontend")
 
 
 @app.get("/")
@@ -420,15 +427,18 @@ async def analyze_sample_documents():
 if __name__ == "__main__":
     import uvicorn
     
+    # Get port from environment variable (Railway sets this)
+    port = int(os.getenv("PORT", 8000))
+    
     print("=" * 70)
     print("AI Due Diligence Engine - API Server")
     print("=" * 70)
     print()
     print("Starting FastAPI server...")
-    print("API will be available at: http://localhost:8000")
-    print("API documentation: http://localhost:8000/docs")
+    print(f"API will be available at: http://0.0.0.0:{port}")
+    print(f"API documentation: http://0.0.0.0:{port}/docs")
     print()
     print("Press CTRL+C to stop the server")
     print("=" * 70)
     
-    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
+    uvicorn.run(app, host="0.0.0.0", port=port, log_level="info")

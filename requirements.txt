@@ -14,3 +14,4 @@ python-multipart>=0.0.6
 langchain-mistralai>=0.0.1
 langchain-community>=0.0.1
 sentence-transformers>=2.2.0
+requests>=2.31.0
